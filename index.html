@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Haven - Cosmetics Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #28282B;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            color: #ff6b9e;
+        }
+
+        /* Navigation Styles */
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #ff6b9e;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #ff4081;
+        }
+
+        /* Top Header Styles */
+
+        .top-header {
+            background-color: #fff5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 100px 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo img {
+            width: 600px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .header-contact {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-contact-item {
+            display: flex;
+            margin-bottom: 10px;
+            color: #ff6b9e;
+        }
+
+        .header-contact h2 {
+            color: #ff4081;
+            text-align: left;
+        }
+
+        /* Header Styles */
+
+        .header {
+            background-color: #ff6b9e;
+            position: sticky;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-icon {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        /* Categories Section */
+
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-box {
+            width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .category-box:hover {
+            transform: scale(1.05);
+            background-color: #ff6b9e;
+        }
+
+        .subcategory-dropdown {
+            display: none;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .subcategory-item {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subcategory-item:hover {
+            background-color: #ff6b9e;
+        }
+
+        .subcategory-item span {
+            margin-right: 10px;
+        }
+
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            width: 250px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            color: #ff6b9e;
+            font-weight: bold;
+        }
+
+        .add-to-cart-btn {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #ff4081;
+        }
+
+        /* Side Cart Styles */
+
+        .side-cart {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 300px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .side-cart.open {
+            right: 0;
+        }
+
+        .side-cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .side-cart-close {
+            cursor: pointer;
+            font-size: 24px;
+            color: #ff6b9e;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f1f1f1;
+            padding: 10px 0;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .cart-item-remove {
+            cursor: pointer;
+            color: #ff6b9e;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .cart-checkout-btn {
+            width: 100%;
+            background-color: #ff6b9e;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-checkout-btn:hover {
+            background-color: #ff4081;
+        }
+
+        /* Footer Styles */
+
+        .footer {
+            background-color: #ff6b9e;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #f1f1f1;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Styles */
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-item {
+                margin-bottom: 20px;
+            }
+
+            .header-logo img {
+                width: 150px;
+            }
+
+            .search-input {
+                width: 200px;
+            }
+
+            .category-box {
+                width: 200px;
+            }
+
+            .product-card {
+                width: 200px;
+            }
+
+            .side-cart {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-item {
+                margin-bottom: 20px;
+            }
+
+            .header-logo img {
+                width: 100px;
+            }
+
+            .search-input {
+                width: 150px;
+            }
+
+            .category-box {
+                width: 150px;
+            }
+
+            .product-card {
+                width: 150px;
+            }
+
+            .side-cart {
+                width: 250px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-section {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="#" class="nav-item">Shop</a>
+            <a href="about.html" class="nav-item">About Us</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">AuraBae</div>
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search products...">
+            <div class="cart-icon" onclick="toggleSideCart()">
+                🛍️
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+    <div class="top-header">
+        <div class="header-logo">
+            <img src="head.avif" alt="Beauty Haven Logo">
+        </div>
+        <div class="header-contact">
+            <h2>Unleash Your Beauty!</h2>
+            <p>we believe that beauty is an art that everyone can embrace. Our mission is to empower you with
+                high-quality, innovative beauty products that enhance your natural beauty and boost your confidence.
+                Whether you’re looking for skincare essentials, makeup must-haves, or luxurious self-care items, we have
+                something special just for you!</p>
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <section class="categories-container" id="categoriesContainer">
+        <div class="category-box" onclick="toggleSubcategories(this)">
+            Skincare 🧴
+            <div class="subcategory-dropdown">
+                <div class="subcategory-item" onclick="filterProducts('Serums')"><span>💧</span> Serums</div>
+                <div class="subcategory-item" onclick="filterProducts('Moisturizers')"><span>🌿</span> Moisturizers
+                </div>
+                <div class="subcategory-item" onclick="filterProducts('Cleansers')"><span>🧼</span> Cleansers</div>
+                <div class="subcategory-item" onclick="filterProducts('Face Masks')"><span>🍯</span> Face Masks</div>
+            </div>
+        </div>
+        <div class="category-box" onclick="toggleSubcategories(this)">
+            Makeup 💄
+            <div class="subcategory-dropdown">
+                <div class="subcategory-item" onclick="filterProducts('Lipstick')"><span>💋</span> Lipstick</div>
+                <div class="subcategory-item" onclick="filterProducts('Foundation')"><span>👩‍🎨</span> Foundation</div>
+                <div class="subcategory-item" onclick="filterProducts('Eyeshadow')"><span>👀</span> Eyeshadow</div>
+                <div class="subcategory-item" onclick="filterProducts('Blush')"><span>🌸</span> Blush</div>
+            </div>
+        </div>
+        <div class="category-box" onclick="toggleSubcategories(this)">
+            Hair Care 💇‍♀️
+            <div class="subcategory-dropdown">
+                <div class="subcategory-item" onclick="filterProducts('Shampoo')"><span>🚿</span> Shampoo</div>
+                <div class="subcategory-item" onclick="filterProducts('Conditioner')"><span>🫧</span> Conditioner</div>
+                <div class="subcategory-item" onclick="filterProducts('Hair Masks')"><span>💆‍♀️</span> Hair Masks</div>
+                <div class="subcategory-item" onclick="filterProducts('Hair Serum')"><span>✨</span> Hair Serum</div>
+            </div>
+        </div>
+        <div class="subcategory-item" onclick="filterProducts()" style="background-color: white; border-radius: 10px;">
+            <span>🌟</span> All
+        </div>
+    </section>
+    <div class="side-cart" id="sideCart">
+        <div class="side-cart-header">
+            <h2>Your Cart</h2>
+            <span class="side-cart-close" onclick="toggleSideCart()">×</span>
+        </div>
+        <div id="cartItemsContainer"></div>
+        <div class="cart-total" id="cartTotal">Total: $0.00</div>
+        <button class="cart-checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+    <!-- Products Container -->
+    <section class="products-container" id="productsContainer"></section>
+
+    <!-- Side Cart (Previous side cart HTML remains the same) -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">Skincare</a></li>
+                    <li><a href="#">Makeup</a></li>
+                    <li><a href="#">Hair Care</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Beauty Haven. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Expanded Product Data
+        const products = [
+            // Skincare Serums
+            {
+                id: 1,
+                name: "Radiant Glow Serum",
+                brand: "LumiNature",
+                price: 45.99,
+                category: "Serums",
+                image: "https://via.placeholder.com/250x300?text=Serum"
+            },
+            {
+                id: 2,
+                name: "Hydra Boost Moisturizer",
+                brand: "AquaBeauty",
+                price: 39.50,
+                category: "Moisturizers",
+                image: "https://via.placeholder.com/250x300?text=Moisturizer"
+            },
+            {
+                id: 3,
+                name: "Deep Cleanse Face Wash",
+                brand: "PureSkin",
+                price: 29.99,
+                category: "Cleansers",
+                image: "https://via.placeholder.com/250x300?text=Facewash"
+            },
+            {
+                id: 4,
+                name: "Vitamin C Brightening Serum",
+                brand: "GlowTech",
+                price: 54.99,
+                category: "Serums",
+                image: "https://via.placeholder.com/250x300?text=VitaminC+Serum"
+            },
+            {
+                id: 5,
+                name: "Hydrating Clay Mask",
+                brand: "NaturalGlow",
+                price: 35.00,
+                category: "Face Masks",
+                image: "https://via.placeholder.com/250x300?text=Clay+Mask"
+            },
+
+            // Makeup
+            {
+                id: 6,
+                name: "Velvet Matte Lipstick",
+                brand: "ChromaGlow",
+                price: 24.99,
+                category: "Lipstick",
+                image: "https://via.placeholder.com/250x300?text=Lipstick"
+            },
+            {
+                id: 7,
+                name: "Liquid Foundation",
+                brand: "Perfect Blend",
+                price: 38.50,
+                category: "Foundation",
+                image: "https://via.placeholder.com/250x300?text=Foundation"
+            },
+            {
+                id: 8,
+                name: "Shimmer Eyeshadow Palette",
+                brand: "ColorWave",
+                price: 42.99,
+                category: "Eyeshadow",
+                image: "https://via.placeholder.com/250x300?text=Eyeshadow"
+            },
+            {
+                id: 9,
+                name: "Natural Blush",
+                brand: "Rosy Cheeks",
+                price: 22.99,
+                category: "Blush",
+                image: "https://via.placeholder.com/250x300?text=Blush"
+            },
+
+            // Hair Care
+            {
+                id: 10,
+                name: "Repair Shampoo",
+                brand: "Hair Rescue",
+                price: 28.99,
+                category: "Shampoo",
+                image: "https://via.placeholder.com/250x300?text=Shampoo"
+            },
+            {
+                id: 11,
+                name: "Hydrating Conditioner",
+                brand: "Moisture Lock",
+                price: 26.50,
+                category: "Conditioner",
+                image: "https://via.placeholder.com/250x300?text=Conditioner"
+            },
+            {
+                id: 12,
+                name: "Nourishing Hair Mask",
+                brand: "Hair Elixir",
+                price: 34.99,
+                category: "Hair Masks",
+                image: "https://via.placeholder.com/250x300?text=Hair+Mask"
+            }
+        ];
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+// Function to save cart items to local storage
+function saveCartToLocalStorage() {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+        document.getElementById('searchInput').addEventListener('keyup', (event) => {
+            const searchQuery = event.target.value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchQuery) ||
+                product.brand.toLowerCase().includes(searchQuery)
+            );
+            renderProducts(filteredProducts);
+        });
+
+        // Rest of the previous JavaScript remains the same
+        // (cart functionality, rendering, etc.)
+        const productsContainer = document.getElementById('productsContainer');
+        const cartCount = document.getElementById('cartCount');
+        const sideCart = document.getElementById('sideCart');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotalElement = document.getElementById('cartTotal');
+        // Function to render products
+        function renderProducts(filteredProducts = products) {
+            productsContainer.innerHTML = ''; // Clear the container
+            filteredProducts.forEach(product => {
+                const productCard = `
+            <div class="product-card" style="background-color: pink;">
+                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">$${product.price.toFixed(2)}</div>
+                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                    Add to Cart
+                </button>
+            </div>
+        `;
+                productsContainer.innerHTML += productCard;
+            });
+        }
+
+        // Function to toggle subcategories
+        function toggleSubcategories(categoryBox) {
+            const dropdown = categoryBox.querySelector('.subcategory-dropdown');
+            const isVisible = dropdown.style.display === 'block';
+            document.querySelectorAll('.subcategory-dropdown').forEach(d => d.style.display = 'none');
+            dropdown.style.display = isVisible ? 'none' : 'block';
+        }
+
+        // Function to filter products by category or subcategory
+        function filterProducts(category) {
+            const filteredProducts = category
+                ? products.filter(product => product.category === category)
+                : products;
+            renderProducts(filteredProducts);
+        }
+
+        // Cart Functionality
+        function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    
+    // Check if product is already in cart
+    const existingProductIndex = cartItems.findIndex(item => item.id === productId);
+    
+    if (existingProductIndex !== -1) {
+        // If product exists, increment quantity (if we want to track quantities)
+        cartItems[existingProductIndex].quantity = 
+            (cartItems[existingProductIndex].quantity || 1) + 1;
+    } else {
+        // If product is not in cart, add it with quantity 1
+        cartItems.push({...product, quantity: 1});
+    }
+    
+    updateCartDisplay();
+    updateCartCount();
+    saveCartToLocalStorage();
+}
+function removeFromCart(productId) {
+    const index = cartItems.findIndex(item => item.id === productId);
+    if (index !== -1) {
+        // If the item has a quantity greater than 1, decrease quantity
+        if (cartItems[index].quantity > 1) {
+            cartItems[index].quantity -= 1;
+        } else {
+            // If quantity is 1, remove the entire item
+            cartItems.splice(index, 1);
+        }
+        
+        updateCartDisplay();
+        updateCartCount();
+        saveCartToLocalStorage();
+    }
+}
+function updateCartCount() {
+    const totalItems = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    cartCount.innerText = totalItems;
+}
+function updateCartDisplay() {
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    cartItems.forEach(item => {
+        const itemTotal = item.price * (item.quantity || 1);
+        total += itemTotal;
+        
+        const cartItemElement = document.createElement('div');
+        cartItemElement.classList.add('cart-item');
+        cartItemElement.innerHTML = `
+            <div class="cart-item-details">
+                <div>${item.name} ${item.quantity > 1 ? `x${item.quantity}` : ''}</div>
+                <div>$${itemTotal.toFixed(2)}</div>
+            </div>
+            <span class="cart-item-remove" onclick="removeFromCart(${item.id})">🗑️</span>
+        `;
+        cartItemsContainer.appendChild(cartItemElement);
+    });
+
+    cartTotalElement.innerText = `Total: $${total.toFixed(2)}`;
+}
+        function toggleSideCart() {
+            sideCart.classList.toggle('open');
+        }
+        function checkout() {
+    console.log('Checkout function called');
+    console.log('Cart items:', cartItems.length);
+    
+    if (cartItems.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    
+    try {
+        window.location.href = 'checkout.html';
+        console.log('Redirection attempted');
+    } catch (error) {
+        console.error('Redirection error:', error);
+    }
+}
+        function initializeCart() {
+    updateCartDisplay();
+    updateCartCount();
+}
+document.addEventListener('DOMContentLoaded', initializeCart);
+        // Initial render
+        renderProducts();
+    </script>
+</body>
+
+</html>

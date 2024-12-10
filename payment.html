@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Beauty Haven</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #28282B;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .checkout-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ff6b9e;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            width: 30%;
+            border: 2px solid #ff6b9e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            background-color: #fff5f9;
+            transform: scale(1.05);
+        }
+
+        .payment-method.selected {
+            background-color: #ff6b9e;
+            color: white;
+        }
+
+        .payment-method img {
+            max-width: 100px;
+            margin-bottom: 15px;
+        }
+
+        .credit-card-form {
+            display: none;
+        }
+
+        .credit-card-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff6b9e;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff6b9e;
+            border-radius: 5px;
+        }
+
+        .pay-button {
+            width: 100%;
+            background-color: #ff6b9e;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pay-button:hover {
+            background-color: #ff4081;
+        }
+
+        .order-summary {
+            background-color: #fff5f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <h1>Checkout</h1>
+            <p>Complete your beauty purchase</p>
+        </div>
+
+        <div class="order-summary" id="orderSummary">
+            <!-- Order summary will be dynamically populated -->
+        </div>
+
+        <h2 style="text-align: center; color: #ff6b9e; margin-bottom: 20px;">Select Payment Method</h2>
+        <div class="payment-methods">
+            <div class="payment-method" data-method="phonepe">
+                <svg height="100" viewBox=".07 .07 2499.95 678.92" width="100" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m1716.78 533.51v-123.27c0-30.34-11.38-45.51-39.82-45.51-11.38 0-24.65 1.9-32.24 3.79v180.16c0 5.69-5.69 11.38-11.38 11.38h-43.62c-5.69 0-11.38-5.69-11.38-11.38v-210.5c0-7.59 5.69-13.27 11.38-15.17 28.45-9.48 56.89-15.17 87.23-15.17 68.27 0 106.2 36.03 106.2 102.41v140.33c0 5.69-5.69 11.38-11.38 11.38h-26.55c-17.06-.01-28.44-13.28-28.44-28.45zm170.68-73.96-1.9 17.07c0 22.76 15.17 36.03 39.82 36.03 18.96 0 36.03-5.69 55-15.17 1.9 0 3.79-1.9 5.69-1.9 3.79 0 5.69 1.9 7.59 3.79 1.9 1.9 5.69 7.59 5.69 7.59 3.79 5.69 7.59 13.27 7.59 18.96 0 9.48-5.69 18.96-13.27 22.76-20.86 11.38-45.51 17.07-72.06 17.07-30.34 0-55-7.59-73.96-22.76-18.96-17.07-30.34-39.82-30.34-68.27v-73.96c0-58.79 37.93-94.82 102.41-94.82 62.58 0 98.61 34.14 98.61 94.82v45.51c0 5.69-5.69 11.38-11.38 11.38h-119.47zm-1.9-41.72h72.06v-18.96c0-22.76-13.27-37.93-36.03-37.93s-36.03 13.27-36.03 37.93zm483.59 41.72-1.9 17.07c0 22.76 15.17 36.03 39.82 36.03 18.96 0 36.03-5.69 55-15.17 1.9 0 3.79-1.9 5.69-1.9 3.79 0 5.69 1.9 7.59 3.79 1.9 1.9 5.69 7.59 5.69 7.59 3.79 5.69 7.59 13.27 7.59 18.96 0 9.48-5.69 18.96-13.27 22.76-20.86 11.38-45.51 17.07-72.06 17.07-30.34 0-55-7.59-73.96-22.76-18.96-17.07-30.34-39.82-30.34-68.27v-73.96c0-58.79 37.93-94.82 102.41-94.82 62.58 0 98.61 34.14 98.61 94.82v45.51c0 5.69-5.69 11.38-11.38 11.38h-119.47v1.9zm-1.9-41.72h72.06v-18.96c0-22.76-13.27-37.93-36.03-37.93s-36.03 13.27-36.03 37.93zm-1115.09 144.12h26.55c5.69 0 11.38-5.69 11.38-11.38v-140.33c0-64.48-34.14-102.41-91.03-102.41-17.07 0-36.03 3.79-47.41 7.59v-70.17c0-15.17-13.27-28.45-28.45-28.45h-26.55c-5.69 0-11.38 5.69-11.38 11.38v322.39c0 5.69 5.69 11.38 11.38 11.38h43.62c5.69 0 11.38-5.69 11.38-11.38v-178.26c9.48-3.79 22.76-5.69 32.24-5.69 28.45 0 39.82 13.27 39.82 45.51v123.27c1.9 13.28 13.28 26.55 28.45 26.55zm286.36-159.3v70.17c0 58.79-39.82 94.82-106.2 94.82-64.48 0-106.2-36.03-106.2-94.82v-70.17c0-58.79 39.82-94.82 106.2-94.82s106.2 36.04 106.2 94.82zm-66.37 0c0-22.76-13.27-37.93-37.93-37.93s-37.93 13.27-37.93 37.93v70.17c0 22.76 13.27 36.03 37.93 36.03s37.93-13.27 37.93-36.03zm-422.9-32.23c0 60.69-45.51 102.41-106.2 102.41-15.17 0-28.45-1.9-41.72-7.59v85.34c0 5.69-5.69 11.38-11.38 11.38h-43.62c-5.69 0-11.38-5.69-11.38-11.38v-301.53c0-7.59 5.69-13.27 11.38-15.17 28.45-9.48 56.89-15.17 87.23-15.17 68.27 0 115.68 41.72 115.68 106.2.01-.01.01 45.51.01 45.51zm-68.27-49.31c0-30.34-20.86-45.51-49.31-45.51-17.07 0-28.45 5.69-28.45 5.69v125.16c11.38 5.69 17.07 7.59 30.34 7.59 28.45 0 49.31-17.07 49.31-45.51v-47.41h-1.89zm1293.35 49.31c0 60.69-45.51 102.41-106.2 102.41-15.17 0-28.45-1.9-41.72-7.59v85.34c0 5.69-5.69 11.38-11.38 11.38h-43.62c-5.69 0-11.38-5.69-11.38-11.38v-301.53c0-7.59 5.69-13.27 11.38-15.17 28.45-9.48 56.89-15.17 87.23-15.17 68.27 0 115.68 41.72 115.68 106.2.01-.01.01 45.51.01 45.51zm-68.27-49.31c0-30.34-20.86-45.51-49.31-45.51-17.07 0-28.45 5.69-28.45 5.69v125.16c11.38 5.69 17.07 7.59 30.34 7.59 28.45 0 49.31-17.07 49.31-45.51v-47.41h-1.89z"
+                        fill="#5f259f" />
+                    <circle cx="339.53" cy="339.53" fill="#5f259f" r="339.46" />
+                    <path
+                        d="m493.6 250.94c0-13.27-11.38-24.65-24.65-24.65h-45.51l-104.3-119.47c-9.48-11.38-24.65-15.17-39.82-11.38l-36.03 11.38c-5.69 1.9-7.59 9.48-3.79 13.27l113.78 108.1h-172.59c-5.69 0-9.48 3.79-9.48 9.48v18.96c0 13.27 11.38 24.65 24.65 24.65h26.55v91.03c0 68.27 36.03 108.1 96.72 108.1 18.96 0 34.14-1.9 53.1-9.48v60.69c0 17.07 13.27 30.34 30.34 30.34h26.55c5.69 0 11.38-5.69 11.38-11.38v-271.19h43.62c5.69 0 9.48-3.79 9.48-9.48zm-121.37 163.09c-11.38 5.69-26.55 7.59-37.93 7.59-30.34 0-45.51-15.17-45.51-49.31v-91.03h83.44z"
+                        fill="#fff" />
+                </svg>
+            </div>
+            <div class="payment-method" data-method="gpay">
+                <svg height="100px" width="100px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2387.3 948" xml:space="preserve">
+                    <style type="text/css">
+                        .st0 {
+                            fill: #5F6368;
+                        }
+
+                        .st1 {
+                            fill: #4285F4;
+                        }
+
+                        .st2 {
+                            fill: #34A853;
+                        }
+
+                        .st3 {
+                            fill: #FBBC04;
+                        }
+
+                        .st4 {
+                            fill: #EA4335;
+                        }
+                    </style>
+                    <g>
+                        <path class="st0" d="M1129.1,463.2V741h-88.2V54.8h233.8c56.4-1.2,110.9,20.2,151.4,59.4c41,36.9,64.1,89.7,63.2,144.8
+		c1.2,55.5-21.9,108.7-63.2,145.7c-40.9,39-91.4,58.5-151.4,58.4L1129.1,463.2L1129.1,463.2z M1129.1,139.3v239.6h147.8
+		c32.8,1,64.4-11.9,87.2-35.5c46.3-45,47.4-119.1,2.3-165.4c-0.8-0.8-1.5-1.6-2.3-2.3c-22.5-24.1-54.3-37.3-87.2-36.4L1129.1,139.3
+		L1129.1,139.3z M1692.5,256.2c65.2,0,116.6,17.4,154.3,52.2c37.7,34.8,56.5,82.6,56.5,143.2V741H1819v-65.2h-3.8
+		c-36.5,53.7-85.1,80.5-145.7,80.5c-51.7,0-95-15.3-129.8-46c-33.8-28.5-53-70.7-52.2-115c0-48.6,18.4-87.2,55.1-115.9
+		c36.7-28.7,85.7-43.1,147.1-43.1c52.3,0,95.5,9.6,129.3,28.7v-20.2c0.2-30.2-13.2-58.8-36.4-78c-23.3-21-53.7-32.5-85.1-32.1
+		c-49.2,0-88.2,20.8-116.9,62.3l-77.6-48.9C1545.6,286.8,1608.8,256.2,1692.5,256.2L1692.5,256.2z M1578.4,597.3
+		c-0.1,22.8,10.8,44.2,29.2,57.5c19.5,15.3,43.7,23.5,68.5,23c37.2-0.1,72.9-14.9,99.2-41.2c29.2-27.5,43.8-59.7,43.8-96.8
+		c-27.5-21.9-65.8-32.9-115-32.9c-35.8,0-65.7,8.6-89.6,25.9C1590.4,550.4,1578.4,571.7,1578.4,597.3L1578.4,597.3z M2387.3,271.5
+		L2093,948h-91l109.2-236.7l-193.6-439.8h95.8l139.9,337.3h1.9l136.1-337.3L2387.3,271.5z" />
+                    </g>
+                    <path class="st1" d="M772.8,403.2c0-26.9-2.2-53.7-6.8-80.2H394.2v151.8h212.9c-8.8,49-37.2,92.3-78.7,119.8v98.6h127.1
+	C729.9,624.7,772.8,523.2,772.8,403.2L772.8,403.2z" />
+                    <path class="st2" d="M394.2,788.5c106.4,0,196-34.9,261.3-95.2l-127.1-98.6c-35.4,24-80.9,37.7-134.2,37.7
+	c-102.8,0-190.1-69.3-221.3-162.7H42v101.6C108.9,704.5,245.2,788.5,394.2,788.5z" />
+                    <path class="st3"
+                        d="M172.9,469.7c-16.5-48.9-16.5-102,0-150.9V217.2H42c-56,111.4-56,242.7,0,354.1L172.9,469.7z" />
+                    <path class="st4" d="M394.2,156.1c56.2-0.9,110.5,20.3,151.2,59.1L658,102.7C586.6,35.7,492.1-1.1,394.2,0
+	C245.2,0,108.9,84.1,42,217.2l130.9,101.6C204.1,225.4,291.4,156.1,394.2,156.1z" />
+                </svg>
+            </div>
+            <div class="payment-method" data-method="credit-card">
+                <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px" viewBox="0 0 64 64"
+                    enable-background="new 0 0 64 64" xml:space="preserve">
+                    <g>
+                        <rect x="2" y="20" fill="#506C7F" width="60" height="8" />
+                        <g>
+                            <path fill="#B4CCB9" d="M2,52c0,1.104,0.896,2,2,2h56c1.104,0,2-0.896,2-2V30H2V52z" />
+                            <path fill="#B4CCB9" d="M60,10H4c-1.104,0-2,0.895-2,2v6h60v-6C62,10.895,61.104,10,60,10z" />
+                        </g>
+                        <path fill="#394240" d="M60,8H4c-2.211,0-4,1.789-4,4v40c0,2.211,1.789,4,4,4h56c2.211,0,4-1.789,4-4V12C64,9.789,62.211,8,60,8z
+		 M62,52c0,1.104-0.896,2-2,2H4c-1.104,0-2-0.896-2-2V30h60V52z M62,28H2v-8h60V28z M62,18H2v-6c0-1.105,0.896-2,2-2h56
+		c1.104,0,2,0.895,2,2V18z" />
+                        <path fill="#394240"
+                            d="M11,40h14c0.553,0,1-0.447,1-1s-0.447-1-1-1H11c-0.553,0-1,0.447-1,1S10.447,40,11,40z" />
+                        <path fill="#394240"
+                            d="M29,40h6c0.553,0,1-0.447,1-1s-0.447-1-1-1h-6c-0.553,0-1,0.447-1,1S28.447,40,29,40z" />
+                        <path fill="#394240"
+                            d="M11,46h10c0.553,0,1-0.447,1-1s-0.447-1-1-1H11c-0.553,0-1,0.447-1,1S10.447,46,11,46z" />
+                        <path fill="#394240" d="M45,46h8c0.553,0,1-0.447,1-1v-6c0-0.553-0.447-1-1-1h-8c-0.553,0-1,0.447-1,1v6C44,45.553,44.447,46,45,46
+		z M46,40h6v4h-6V40z" />
+                        <rect x="46" y="40" fill="#F9EBB2" width="6" height="4" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <div class="credit-card-form" id="creditCardForm">
+            <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+            <div class="form-group">
+                <label>Cardholder Name</label>
+                <input type="text" placeholder="John Doe">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div class="form-group" style="width: 48%;">
+                    <label>Expiry Date</label>
+                    <input type="text" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group" style="width: 48%;">
+                    <label>CVV</label>
+                    <input type="text" placeholder="123" maxlength="3">
+                </div>
+            </div>
+        </div>
+
+        <button class="pay-button" onclick="processPayment()">Pay Now</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve cart items from local storage
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const orderSummary = document.getElementById('orderSummary');
+            let totalAmount = 0;
+
+            // Populate order summary
+            cartItems.forEach(item => {
+                const itemTotal = item.price * (item.quantity || 1);
+                totalAmount += itemTotal;
+
+                const orderItem = document.createElement('div');
+                orderItem.classList.add('order-item');
+                orderItem.innerHTML = `
+                    <span>${item.name} ${item.quantity > 1 ? `x${item.quantity}` : ''}</span>
+                    <span>$${itemTotal.toFixed(2)}</span>
+                `;
+                orderSummary.appendChild(orderItem);
+            });
+
+            // Add total to order summary
+            const totalElement = document.createElement('div');
+            totalElement.classList.add('order-item');
+            totalElement.innerHTML = `
+                <strong>Total</strong>
+                <strong>$${totalAmount.toFixed(2)}</strong>
+            `;
+            orderSummary.appendChild(totalElement);
+
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const creditCardForm = document.getElementById('creditCardForm');
+
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function () {
+                    // Remove selected class from all methods
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+
+                    // Add selected class to clicked method
+                    this.classList.add('selected');
+
+                    // Show/hide credit card form
+                    if (this.dataset.method === 'credit-card') {
+                        creditCardForm.classList.add('active');
+                    } else {
+                        creditCardForm.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        function processPayment() {
+            const selectedMethod = document.querySelector('.payment-method.selected');
+
+            if (!selectedMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+
+            const method = selectedMethod.dataset.method;
+
+            if (method === 'credit-card') {
+                const cardNumber = document.querySelector('#creditCardForm input[placeholder="1234 5678 9012 3456"]').value;
+                const cardName = document.querySelector('#creditCardForm input[placeholder="John Doe"]').value;
+                const expiry = document.querySelector('#creditCardForm input[placeholder="MM/YY"]').value;
+                const cvv = document.querySelector('#creditCardForm input[placeholder="123"]').value;
+
+                if (!cardNumber || !cardName || !expiry || !cvv) {
+                    alert('Please fill in all credit card details');
+                    return;
+                }
+            }
+
+            // Simulate payment processing
+            alert(`Order completed`);
+
+            // Clear cart after successful payment
+            localStorage.removeItem('cartItems');
+        }
+    </script>
+</body>
+
+</html>
