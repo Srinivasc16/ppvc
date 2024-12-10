@@ -18,19 +18,37 @@
             line-height: 1.6;
         }
 
-        /* Navigation Styles (Same as main page) */
-        .navbar {
-            background-color: #ffffff;
+        .header {
+            background-color: #ff6b9e;
+            position: fixed;
+            margin-top: -40px;
+            width: 100%;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: right;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
             z-index: 1000;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .nav-container {
             display: flex;
-            justify-content: center;
+            justify-content: right;
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
@@ -39,30 +57,13 @@
 
         .nav-item {
             text-decoration: none;
-            color: #ff6b9e;
+            color: white;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         .nav-item:hover {
-            color: #ff4081;
-        }
-
-        /* Header Styles */
-        .header {
-            background-color: #ff6b9e;
-            position: sticky;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+            color: black;
         }
 
         .cart-icon {
@@ -70,6 +71,17 @@
             font-size: 24px;
             cursor: pointer;
             position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
         }
 
         /* Contact Form Styles */
@@ -200,21 +212,14 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item">Home</a>
-            <a href="#" class="nav-item">Shop</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-        </div>
-    </nav>
-
-    <!-- Header -->
     <header class="header">
         <div class="logo">AuraBae</div>
-        <div class="cart-icon" onclick="toggleSideCart()">
-            🛍️
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Shop</a>
+                <a href="about.html" class="nav-item">About Us</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </div>
         </div>
     </header>
 

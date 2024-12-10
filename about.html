@@ -17,14 +17,31 @@
             color: #333;
             line-height: 1.6;
         }
-
-        .navbar {
-            background-color: #ffffff;
+        .header {
+            background-color: #ff6b9e;
+            position: fixed;
+            width: 100%;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
             z-index: 1000;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .nav-container {
@@ -38,19 +55,38 @@
 
         .nav-item {
             text-decoration: none;
-            color: #ff6b9e;
+            color: white;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         .nav-item:hover {
-            color: #ff4081;
+            color: black;
+        }
+
+        .cart-icon {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
         }
 
         .about-container {
+            margin-top: 100px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 100px 100px;
             background-color: #fff5f9;
             min-height: calc(100vh - 300px);
         }
@@ -182,15 +218,16 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item">Home</a>
-            <a href="#" class="nav-item">Shop</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="contact.html" class="nav-item">Contact</a>
+    <header class="header">
+        <div class="logo">AuraBae</div>
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Shop</a>
+                <a href="about.html" class="nav-item">About Us</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <!-- About Us Content -->
     <div class="about-container">
@@ -219,27 +256,6 @@
                 <li>Support sustainable and ethical beauty practices</li>
                 <li>Create a community that celebrates diversity and individuality</li>
             </ul>
-        </div>
-
-        <div class="team-section">
-            <div class="team-member">
-                <img src="https://via.placeholder.com/200?text=Founder" alt="Sophia Chen">
-                <h3>Sophia Chen</h3>
-                <p>Founder & CEO</p>
-                <p>Beauty innovator with 10 years of industry experience</p>
-            </div>
-            <div class="team-member">
-                <img src="https://via.placeholder.com/200?text=Creative+Director" alt="Emma Rodriguez">
-                <h3>Emma Rodriguez</h3>
-                <p>Creative Director</p>
-                <p>Award-winning makeup artist and brand strategist</p>
-            </div>
-            <div class="team-member">
-                <img src="https://via.placeholder.com/200?text=Research+Lead" alt="Dr. Aisha Patel">
-                <h3>Dr. Aisha Patel</h3>
-                <p>Research & Development Lead</p>
-                <p>Dermatologist specializing in skincare formulations</p>
-            </div>
         </div>
     </div>
 

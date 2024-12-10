@@ -34,7 +34,6 @@
             background-color: #ffffff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 15px 0;
-            position: sticky;
             top: 0;
             z-index: 1000;
         }
@@ -50,13 +49,13 @@
 
         .nav-item {
             text-decoration: none;
-            color: #ff6b9e;
+            color: black;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         .nav-item:hover {
-            color: #ff4081;
+            color: white;
         }
 
         /* Top Header Styles */
@@ -102,7 +101,8 @@
 
         .header {
             background-color: #ff6b9e;
-            position: sticky;
+            position: fixed;
+            width: 100%;
             color: white;
             padding: 15px 20px;
             display: flex;
@@ -222,8 +222,8 @@
         }
 
         .product-image {
-            width: 200px;
-            height: 250px;
+            width: 130px;
+            height: 150px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 10px;
@@ -454,21 +454,17 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item">Home</a>
-            <a href="#" class="nav-item">Shop</a>
-            <a href="about.html" class="nav-item">About Us</a>
-            <a href="contact.html" class="nav-item">Contact</a>
-        </div>
-    </nav>
-
     <!-- Header -->
     <header class="header">
         <div class="logo">AuraBae</div>
         <div class="search-container">
             <input type="text" class="search-input" id="searchInput" placeholder="Search products...">
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Shop</a>
+                <a href="about.html" class="nav-item">About Us</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </div>
             <div class="cart-icon" onclick="toggleSideCart()">
                 🛍️
                 <span class="cart-count" id="cartCount">0</span>
@@ -569,110 +565,108 @@
     </footer>
 
     <script>
-        // Expanded Product Data
-        const products = [
-            // Skincare Serums
-            {
-                id: 1,
-                name: "Radiant Glow Serum",
-                brand: "LumiNature",
-                price: 45.99,
-                category: "Serums",
-                image: "https://via.placeholder.com/250x300?text=Serum"
-            },
-            {
-                id: 2,
-                name: "Hydra Boost Moisturizer",
-                brand: "AquaBeauty",
-                price: 39.50,
-                category: "Moisturizers",
-                image: "https://via.placeholder.com/250x300?text=Moisturizer"
-            },
-            {
-                id: 3,
-                name: "Deep Cleanse Face Wash",
-                brand: "PureSkin",
-                price: 29.99,
-                category: "Cleansers",
-                image: "https://via.placeholder.com/250x300?text=Facewash"
-            },
-            {
-                id: 4,
-                name: "Vitamin C Brightening Serum",
-                brand: "GlowTech",
-                price: 54.99,
-                category: "Serums",
-                image: "https://via.placeholder.com/250x300?text=VitaminC+Serum"
-            },
-            {
-                id: 5,
-                name: "Hydrating Clay Mask",
-                brand: "NaturalGlow",
-                price: 35.00,
-                category: "Face Masks",
-                image: "https://via.placeholder.com/250x300?text=Clay+Mask"
-            },
+       const products = [
+    {
+        id: 1,
+        name: "Glow Serum ✨",
+        brand: "LumiNature",
+        price: 45.99,
+        category: "Serums",
+        image: "img/1.jpg"
+    },
+    {
+        id: 2,
+        name: "Hydrating Cream 💧",
+        brand: "AquaBeauty",
+        price: 39.50,
+        category: "Moisturizers",
+        image: "img/2.webp"
+    },
+    {
+        id: 3,
+        name: "Fresh Face Wash 🧼",
+        brand: "PureSkin",
+        price: 29.99,
+        category: "Cleansers",
+        image: "img/3.webp"
+    },
+    {
+        id: 4,
+        name: "Vitamin C Serum 🍊",
+        brand: "GlowTech",
+        price: 54.99,
+        category: "Serums",
+        image: "img/4.webp"
+    },
+    {
+        id: 5,
+        name: "Clay Face Mask 🧖‍♀️",
+        brand: "NaturalGlow",
+        price: 35.00,
+        category: "Face Masks",
+        image: "img/5.webp"
+    },
 
-            // Makeup
-            {
-                id: 6,
-                name: "Velvet Matte Lipstick",
-                brand: "ChromaGlow",
-                price: 24.99,
-                category: "Lipstick",
-                image: "https://via.placeholder.com/250x300?text=Lipstick"
-            },
-            {
-                id: 7,
-                name: "Liquid Foundation",
-                brand: "Perfect Blend",
-                price: 38.50,
-                category: "Foundation",
-                image: "https://via.placeholder.com/250x300?text=Foundation"
-            },
-            {
-                id: 8,
-                name: "Shimmer Eyeshadow Palette",
-                brand: "ColorWave",
-                price: 42.99,
-                category: "Eyeshadow",
-                image: "https://via.placeholder.com/250x300?text=Eyeshadow"
-            },
-            {
-                id: 9,
-                name: "Natural Blush",
-                brand: "Rosy Cheeks",
-                price: 22.99,
-                category: "Blush",
-                image: "https://via.placeholder.com/250x300?text=Blush"
-            },
+    // Makeup
+    {
+        id: 6,
+        name: "Matte Lipstick 💄",
+        brand: "ChromaGlow",
+        price: 24.99,
+        category: "Lipstick",
+        image: "img/6.webp"
+    },
+    {
+        id: 7,
+        name: "Liquid Foundation 🪞",
+        brand: "Perfect Blend",
+        price: 38.50,
+        category: "Foundation",
+        image: "img/7.jpeg"
+    },
+    {
+        id: 8,
+        name: "Eyeshadow Palette 🎨",
+        brand: "ColorWave",
+        price: 42.99,
+        category: "Eyeshadow",
+        image: "img/8.webp"
+    },
+    {
+        id: 9,
+        name: "Blush Powder 🌸",
+        brand: "Rosy Cheeks",
+        price: 22.99,
+        category: "Blush",
+        image: "img/9.webp"
+    },
 
-            // Hair Care
-            {
-                id: 10,
-                name: "Repair Shampoo",
-                brand: "Hair Rescue",
-                price: 28.99,
-                category: "Shampoo",
-                image: "https://via.placeholder.com/250x300?text=Shampoo"
-            },
-            {
-                id: 11,
-                name: "Hydrating Conditioner",
-                brand: "Moisture Lock",
-                price: 26.50,
-                category: "Conditioner",
-                image: "https://via.placeholder.com/250x300?text=Conditioner"
-            },
-            {
-                id: 12,
-                name: "Nourishing Hair Mask",
-                brand: "Hair Elixir",
-                price: 34.99,
-                category: "Hair Masks",
-                image: "https://via.placeholder.com/250x300?text=Hair+Mask"
-            }
-        ];
+    // Hair Care
+    {
+        id: 10,
+        name: "Repair Shampoo 🧴",
+        brand: "Hair Rescue",
+        price: 28.99,
+        category: "Shampoo",
+        image: "img/10.jpeg"
+    },
+    {
+        id: 11,
+        name: "Moisture Conditioner 💧",
+        brand: "Moisture Lock",
+        price: 26.50,
+        category: "Conditioner",
+        image: "img/11.jpg"
+    },
+    {
+        id: 12,
+        name: "Hair Nourish Mask 🧖‍♂️",
+        brand: "Hair Elixir",
+        price: 34.99,
+        category: "Hair Masks",
+        image: "img/12.webp"
+    }
+];
         let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
 // Function to save cart items to local storage
